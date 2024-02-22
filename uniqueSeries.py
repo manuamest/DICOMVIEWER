@@ -13,18 +13,20 @@ def find_unique_series_numbers_and_thicknesses(folder_path):
             ds = pydicom.dcmread(file_path)
             series_number = str(ds.get("SeriesNumber"))
             thickness = ds.get("SliceThickness")
+            series_description = ds.get("SeriesDescription")  # Obtener la descripción de la serie
             if series_number in series_data:
                 if thickness is not None:
                     series_data[series_number]['thicknesses'].add(thickness)
                 else:
                     series_data[series_number]['no_thickness'].append(file_name)
             else:
-                series_data[series_number] = {'thicknesses': set(), 'no_thickness': []}
+                series_data[series_number] = {'thicknesses': set(), 'no_thickness': [], 'series_description': series_description}  # Agregar la descripción de la serie
                 if thickness is not None:
                     series_data[series_number]['thicknesses'].add(thickness)
                 else:
                     series_data[series_number]['no_thickness'].append(file_name)
     return series_data
+
 
 def show_dicom_study(folder_path, series_number, thickness):
     viewer = DicomViewer(folder_path, series_number, thickness)
