@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import Button
-from DICOMVIEWER.uniqueSeries import find_unique_series_numbers_and_thicknesses, show_dicom_study
+from uniqueSeries import find_unique_series_numbers_and_thicknesses, show_dicom_study
 
 def show_series_data(folder_path, series_data):
     root = tk.Tk()

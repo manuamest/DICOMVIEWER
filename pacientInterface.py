@@ -2,7 +2,9 @@ import os
 import tkinter as tk
 from tkinter import Button
 from studyInterface import show_series_data
-from DICOMVIEWER.uniqueSeries import find_unique_series_numbers_and_thicknesses, show_dicom_study
+from uniqueSeries import find_unique_series_numbers_and_thicknesses
+from studyInterface import show_series_data
+from previewStudies import previewStudies
 
 def show_series_folders(folder_path, series_data):
     root = tk.Tk()
@@ -14,13 +16,18 @@ def show_series_folders(folder_path, series_data):
         button.pack(fill=tk.BOTH, expand=True)  # Rellenar horizontalmente y expandir
     root.mainloop()
 
+# MOSTRAR ESTUDIOS CON INTERFAZ DE SERIES NUMBER Y THICKNESS
+#def show_studies_in_folder(root_folder, folder_name):
+#    folder_path = os.path.join(root_folder, folder_name)
+#    series_data = find_unique_series_numbers_and_thicknesses(folder_path)
+#    show_series_data(folder_path, series_data)
+
+# MOSTRAR ESTUDIOS CON IMAGENES Y NOMBRES
 def show_studies_in_folder(root_folder, folder_name):
     folder_path = os.path.join(root_folder, folder_name)
-    series_data = find_unique_series_numbers_and_thicknesses(folder_path)
-    show_series_data(folder_path, series_data)
+    previewStudies(folder_path)
 
-def main():
-    folder_path = r'D:\TFG\estudios_ct'
+def pacientInterface(folder_path):
     if not os.path.isdir(folder_path):
         print("Invalid folder path.")
         return
@@ -29,4 +36,5 @@ def main():
     show_series_folders(folder_path, folder_names)
 
 if __name__ == "__main__":
-    main()
+    folder_path = r'D:\TFG\estudios_ct'
+    pacientInterface(folder_path)

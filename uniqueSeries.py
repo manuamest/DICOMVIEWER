@@ -29,7 +29,8 @@ def find_unique_series_numbers_and_thicknesses(folder_path):
 
 
 def show_dicom_study(folder_path, series_number, thickness):
-    viewer = DicomViewer(folder_path, series_number, thickness)
+    fig = plt.figure()
+    viewer = DicomViewer(folder_path, series_number, thickness, fig)
     viewer.show_dicom()
     plt.show()
 
