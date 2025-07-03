@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import Button
 import pydicom
-from DICOMVIEWER.uniqueSeries import find_unique_series_numbers_and_thicknesses, show_dicom_study
+from ..utils.series_utils import find_unique_series_numbers_and_thicknesses, show_dicom_study
 from PIL import Image, ImageTk
 import os
 

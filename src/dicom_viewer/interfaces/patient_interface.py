@@ -1,10 +1,9 @@
 import os
 import tkinter as tk
 from tkinter import Button
-from studyInterface import show_series_data
-from uniqueSeries import find_unique_series_numbers_and_thicknesses
-from studyInterface import show_series_data
-from previewStudies import previewStudies
+from .study_interface import show_series_data
+from ..utils.series_utils import find_unique_series_numbers_and_thicknesses
+from .preview_studies import previewStudies
 
 def show_series_folders(folder_path, series_data):
     root = tk.Tk()
@@ -27,7 +26,7 @@ def show_studies_in_folder(root_folder, folder_name):
     folder_path = os.path.join(root_folder, folder_name)
     previewStudies(folder_path)
 
-def pacientInterface(folder_path):
+def patient_interface(folder_path):
     if not os.path.isdir(folder_path):
         print("Invalid folder path.")
         return
@@ -37,4 +36,4 @@ def pacientInterface(folder_path):
 
 if __name__ == "__main__":
     folder_path = r'D:\TFG\estudios_ct'
-    pacientInterface(folder_path)
+    patient_interface(folder_path)

@@ -3,7 +3,7 @@ import pydicom
 import tkinter as tk
 from tkinter import Button
 import matplotlib.pyplot as plt
-from dicom_viewer import DicomViewer
+from ..core.dicom_viewer import DicomViewer
 
 def find_unique_series_numbers_and_thicknesses(folder_path):
     series_data = {}
