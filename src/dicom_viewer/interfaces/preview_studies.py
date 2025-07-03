@@ -3,38 +3,23 @@ from tkinter import Button
 import pydicom
 from PIL import Image, ImageTk
 import os
-from uniqueSeries import show_dicom_study, find_unique_series_numbers_and_thicknesses
+from ..utils.series_utils import show_dicom_study, find_unique_series_numbers_and_thicknesses
 import numpy as np
 
 # Lista para almacenar las referencias de las imágenes
 image_references = []
 
 def load_dicom_image(file_path, scale_factor=4):
-    ds = pydicom.dcmread(file_path)
-    if 'PixelData' in ds:
-        img = ds.pixel_array
-
-        # Aplicar aumento de contraste solo si el grosor está definido
-        if ds.get('SliceThickness') is not None:
-            img = increase_contrast(img)
-
-        img = Image.fromarray(img.astype('uint8'))
-        new_width = img.width // scale_factor
-        new_height = img.height // scale_factor
-        img = img.resize((new_width, new_height))
-        img = ImageTk.PhotoImage(img)
-        return img, new_width, new_height
-    else:
+    """Load DICOM image and return as PhotoImage for Tkinter."""
+    from ..utils.image_utils import load_dicom_image as load_image
+    from PIL import ImageTk
+    
+    try:
+        pil_image = load_image(file_path, scale_factor)
+        photo_image = ImageTk.PhotoImage(pil_image)
+        return photo_image, pil_image.width, pil_image.height
+    except Exception:
         return None, 0, 0
-
-def increase_contrast(image):
-    # Normalizar la imagen entre 0 y 1
-    image = (image - np.min(image)) / (np.max(image) - np.min(image))
-    # Aplicar aumento de contraste
-    image = np.power(image, 0.5)
-    # Escalar nuevamente a 0-255
-    image = (image * 255).astype(np.uint8)
-    return image
 
 def create_button(folder_path, root, button_text, img_path, series_number, thickness, series_data, row, col, img_list):
     img = load_dicom_image(img_path)
