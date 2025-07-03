@@ -1,0 +1,26 @@
+# DICOM Visualization System - Required Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core DICOM functionality
+pydicom>=2.3.0
+
+# Image display and visualization
+matplotlib>=3.5.0
+
+# Image processing and manipulation
+Pillow>=9.0.0
+numpy>=1.21.0
+
+# Optional dependencies for enhanced functionality
+# Uncomment lines below for additional features:
+
+# scipy>=1.7.0              # Advanced image processing algorithms
+# opencv-python>=4.5.0      # Computer vision and advanced image operations
+# nibabel>=3.2.0            # Support for additional medical image formats
+# SimpleITK>=2.1.0          # Advanced medical image processing
+
+# Development and testing dependencies (optional)
+# pytest>=6.0.0             # Unit testing framework
+# pytest-cov>=2.12.0        # Coverage reporting
+# black>=22.0.0             # Code formatting
+# flake8>=4.0.0             # Code linting
